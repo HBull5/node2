@@ -6,6 +6,7 @@ const path = require('path');
 // CRUD
 // GET (READ), POST (WRITE), PUT (UPDATES), DELETE (DUH)
 
+// this piece of middleware allows us to read the body of post requests
 app.use(express.urlencoded({ extended: true }));
 
 // DEFINING MIDDLEWARE FUNCTION
@@ -41,6 +42,10 @@ app.get('/contact', (req, res) => {
 });
 
 app.use('/auth', require('./routes/auth'));
+
+app.get('/dashboard', (req, res) => {
+	res.sendFile(path.join(__dirname, 'html', 'dashboard.html'));
+});
 
 // handler for all front facing assets
 app.get('/public/*', (req, res) => {
